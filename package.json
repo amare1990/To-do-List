@@ -1,10 +1,12 @@
 {
-  "name": "Set-up-project-with-webpack",
+  "name": "set-up-project-with-webpack",
   "version": "1.0.0",
   "description": "![](https://img.shields.io/badge/Microverse-blueviolet)",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack serve --mode development --env development",
+    "start": "webpack serve --open",
     "build": "webpack"
   },
   "repository": {
@@ -28,5 +30,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.21"
-  }
+  },
+  "main": "webpack.config.js"
 }
