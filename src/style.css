@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700;800&display=swap');
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,7 +5,7 @@
 }
 
 body {
-  font-family: Karla;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
   background-color: #ddd;
   display: flex;
   align-items: center;
@@ -17,6 +16,7 @@ body {
   width: 80%;
   margin: 100px auto;
   background-color: #fffbff;
+  box-shadow: 0 3px 4px 3px #ccc;
 }
 
 .task-lists {
@@ -33,12 +33,30 @@ body {
   justify-content: space-between;
 }
 
+.opacity {
+  opacity: 0.5;
+  font-weight: 400;
+}
+
+.btn {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: none;
+  background-color: #fffbff;
+  font-weight: 100;
+  opacity: 0.5;
+}
+
 .clear-btn {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   width: 100%;
   height: 40px;
   background-color: #ddd;
-  align-self: center;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 100;
+  opacity: 0.5;
 }
 
 .part {
@@ -46,5 +64,4 @@ body {
   padding-left: 16px;
   padding-right: 10px;
   border-bottom: 1px solid #ddd;
-  box-shadow: 0 1px 6px 2px #a10035;
 }
