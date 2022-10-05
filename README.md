@@ -1,56 +1,35 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Project Name
+# To-do List: Add Structure
 
-> Description the project.
-
-
+>To-do list project developed using HTML, CSS and JavaScript allows anybody who wants to manage the daily tasks. This specific project, To-do List: Add Structure that provides only the layout of the web content is the beginning of the To-do List complete project. It is based on the webpack setup on the previous exercise.  
 ## Built With
 
-- Major languages
-- Frameworks
-- Technologies used
-
-## Live Demo (if available)
-
-[Live Demo Link](https://livedemo.com)
+- Major languages: HTML, CSS, and JavaScript.
+- Frameworks: No framework used.
+- Technologies used: Git, Github, Github flows, Webpack bundler, VS code editor, node.js, npm.
 
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
+**You can clone to your local repository, modify it and contribute to the project using the command from your terminal: git clone https://github.com/amare1990/To-do-List.git.**
 
 
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
+You have to install node.jx and npm package manager before trying to use this project.
 
 ### Setup
-
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
-
-
+You have to setup webpack package bundler. You can use https://webpack.js.org/guides/getting-started/#basic-setup link to setup the webpack for your project.
 
 ## Authors
 
-👤 **Author1**
+👤 **Amare Kassa**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
-
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@githubhandle](https://github.com/amare1990)
+- Email: [@emailhandle](amaremek@gmail.com)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/amare1990)
 
 ## 🤝 Contributing
 
@@ -70,6 +49,4 @@ Give a ⭐️ if you like this project!
 
 ## 📝 License
 
-This project is [MIT](./LICENSE) licensed.
-
-_NOTE: we recommend using the [MIT license](https://choosealicense.com/licenses/mit/) - you can set it up quickly by [using templates available on GitHub](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository). You can also use [any other license](https://choosealicense.com/licenses/) if you wish._
+This project is [MIT/https://github.com/amare1990/To-do-List](./LICENSE) licensed.
