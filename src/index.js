@@ -4,18 +4,18 @@ import './style.css';
 const toDoTasks = [
   {
     Index: 0,
-    description: "Finish the Profesional Skils Project",
-    completed: false
+    description: 'Finish the Profesional Skils Project',
+    completed: false,
   },
   {
     Index: 1,
-    description: "Read All the lessons",
-    completed: false
+    description: 'Read All the lessons',
+    completed: false,
   },
   {
     Index: 2,
     description: "Finish today's project",
-    completed: false    
+    completed: false,   
   },
 ];
 
@@ -33,7 +33,7 @@ wrapper.innerHTML = `
  </button>
 </div>`;
 const displayTasks = () => {
-  for(let i = 0; i < toDoTasks.length; i++) {
+  for (let i = 0; i < toDoTasks.length; i += 1) {
     const task = document.createElement('div');
     task.className = 'task';
     task.innerHTML = `
@@ -51,12 +51,11 @@ const displayTasks = () => {
     wrapper.appendChild(task);
   }
   const clearBtn = document.createElement('button');
-  clearBtn.className = "clear-btn";
-  clearBtn.innerHTML = "Clear all completed";
+  clearBtn.className = 'clear-btn';
+  clearBtn.innerHTML = 'Clear all completed';
   wrapper.append(clearBtn);
 };
 
 displayTasks();
 
 const inputTask = document.querySelector('.input-task');
-inputTask.style.color = "white";
