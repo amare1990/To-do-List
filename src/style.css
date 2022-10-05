@@ -1,3 +1,50 @@
-.hello {
-  color: red;
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700;800&display=swap');
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Karla;
+  background-color: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 80%;
+  margin: 100px auto;
+  background-color: #fffbff;
+}
+
+.task-lists {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-part {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.clear-btn {
+  width: 100%;
+  height: 40px;
+  background-color: #ddd;
+  align-self: center;
+  cursor: pointer;
+}
+
+.part {
+  height: 40px;
+  padding-left: 16px;
+  padding-right: 10px;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 1px 6px 2px #a10035;
 }
