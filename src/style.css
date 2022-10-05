@@ -33,6 +33,10 @@ body {
   justify-content: space-between;
 }
 
+#input-task {
+  border: none;
+}
+
 .opacity {
   opacity: 0.5;
   font-weight: 400;

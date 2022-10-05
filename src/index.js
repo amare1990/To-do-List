@@ -1,4 +1,4 @@
-import _ from 'lodash';
+// import _ from 'lodash';
 import './style.css';
 
 const toDoTasks = [
@@ -15,7 +15,7 @@ const toDoTasks = [
   {
     Index: 2,
     description: "Finish today's project",
-    completed: false,   
+    completed: false,
   },
 ];
 
@@ -39,8 +39,8 @@ const displayTasks = () => {
     task.innerHTML = `
     
     <div class ="task-lists part">
-      <div>
-        <input type="checkbox" id="${toDoTasks[i].Index}" value="${toDoTasks[i].description}" name = "Task" class = "input-task opacity">
+      <div class = "input-field>
+        <input type="checkbox" id="${toDoTasks[i].Index}" value="${toDoTasks[i].description}" name = "Task" class = "input-task-class opacity">
         <label class = "opacity" for="${toDoTasks[i].Index}"> ${toDoTasks[i].description}  </label>
       </div>
       <button type = "button" class = "edit-task btn">
@@ -57,5 +57,3 @@ const displayTasks = () => {
 };
 
 displayTasks();
-
-const inputTask = document.querySelector('.input-task');

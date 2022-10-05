@@ -9,6 +9,9 @@
     "start": "webpack serve --open",
     "build": "webpack"
   },
+  "rule": {
+    "no-unused-vars": "off"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/amare1990/Set-up-project-with-webpack.git"
