@@ -34,7 +34,10 @@ body {
 }
 
 #input-task {
+  width: 100%;
+  height: 80%;
   border: none;
+  margin-right: 5px;
 }
 
 .opacity {
