@@ -1,7 +1,7 @@
 // import _ from 'lodash';
 import './style.css';
 
-window.onload = () => {
+//window.onload = () => {
   const parser = new DOMParser();
   const wrapper = document.querySelector('.wrapper');
 const addBtn = document.querySelector('.add-btn');
@@ -13,7 +13,7 @@ class List{
     this.description = description;
   }
 }
-
+//localStorage.removeItem('listsKey');
 let listArray = [];
 const storedListJSON = localStorage.getItem('listsKey');
 if(storedListJSON) {
@@ -45,7 +45,7 @@ if(storedListJSON) {
       const newList = `
       <div class = "task-lists part"> 
         <div class = "input-field>
-        <input type="checkbox" id="${i}" value="${listArray[i].description} " name = "task" class = "input-task-class opacity" myIndex = ${i}>
+        <input type="checkbox" id="${i}" ${listArray[i].completed ? 'checked':''}  value="${listArray[i].description} " name = "task" class = "input-task-class opacity">
         <label class = "opacity task-label" for="${i}"> ${listArray[i].description}  </label>
         </div>
         <input type="text" class="edit-Input hidden" value=${listArray[i].description}>
@@ -53,10 +53,10 @@ if(storedListJSON) {
           <button type = "button" class = " btn">
             <i class='fas fa-ellipsis-v edit-task'></i>
           </button>
-          <button type = "button" class = "edit btn hidden">
+          <button type = "button" class = "edit-btn btn hidden">
             <i class="fas fa-i-cursor edit"></i>
           </button>
-          <button type = "button" class = "delete btn hidden">
+          <button type = "button" class = "delete-btn btn hidden" myIndex = ${i}>
             <i class="fa-solid fa-trash-can delete"></i>
           </button>    
         </div>
@@ -69,7 +69,7 @@ if(storedListJSON) {
       const toBeEdited = newListElement.querySelector('.task-label');
 
       const editInput = newListElement.querySelector('.edit-Input');
-      const editBtn = newListElement.querySelector('.edit');
+      const editBtn = newListElement.querySelector('.edit-btn');
 
       threeVBtn.addEventListener('click', (e) => {        
           editBtn.classList.remove('hidden');
@@ -79,23 +79,43 @@ if(storedListJSON) {
           editInput.style.marginRight = '10px';
           toBeEdited.classList.add('hidden');
           editInput.focus();
-      })
+      });
 
-      /* editBtn.addEventListener('keypress', (e) => {
+       const delBtn = newListElement.querySelector('.delete-btn');
+       editInput.addEventListener('keypress', (e) => {
         if(e.key === "Enter") {
           e.preventDefault();
-          toBeEdited.innerHTML = edit.innerHTML;
-          editBtn.classList.remove('hidden');
-          
+          toBeEdited.innerHTML = editInput.value;
+          toBeEdited.classList.remove('hidden');
+          editBtn.classList.add('hidden');  
+          delBtn.classList.remove('hidden');
+          editInput.classList.add('hidden');
+          //threeVBtn.classList.remove('hidden');
         }
-      }); */
+      });
+      
+      // Remove task from the list
+      delBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        removeTask(e, newListElement);
+      });
 
 
       wrapper.append(newListElement);
     } //end of for loop
 
     //wrapper.append(doList);
+  } //end of showtask() function
+
+  function removeTask(e, newListElement) {
+    const index = e.target.getAttribute('myIndex');
+
+    listArray.splice(index, 1);
+    newListElement.remove();
+    console.log('listArray after trashing'+listArray);
+    localStorage.setItem('listsKey', JSON.stringify(listArray));
+    //showTask();
   }
   //localStorage.removeItem('listsKey')
 
-}; //End of window loads
+//}; //End of window loads

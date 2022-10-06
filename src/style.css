@@ -77,7 +77,12 @@ body {
   border-bottom: 1px solid #ddd;
 }
 
-.edit-task {
+.edit-task,
+.edit,
+.edit-btn
+.delete,
+.delete-btn
+ {
   cursor: pointer;
   opacity: 0.5;
 }
