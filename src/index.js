@@ -1,59 +1,64 @@
-// import _ from 'lodash';
+/* eslint no-use-before-define: ["error", { "classes": false }] */
+/* eslint-env es6 */
+
 import './style.css';
 
 window.onload = () => {
   const parser = new DOMParser();
   const wrapper = document.querySelector('.wrapper');
   const listsContainer = document.querySelector('.lists-container');
-const addBtn = document.querySelector('.add-btn');
+  const addBtn = document.querySelector('.add-btn');
+  let listArray = [];
 
-class List{
-  constructor(Index = listArray.length, completed = false, description) {
-    this.Index = Index;
-    this.completed = completed;
-    this.description = description;
+  class List {
+    constructor(Index = listArray.length, completed = false, description) {
+      this.Index = Index;
+      this.completed = completed;
+      this.description = description;
+    }
   }
-}
-//localStorage.removeItem('listsKey');
-let listArray = [];
-const storedListJSON = localStorage.getItem('listsKey');
-if(storedListJSON) {
-  listArray = JSON.parse(storedListJSON);
-  showTask(); 
-}
 
- let listObj = new List();
-  addBtn.addEventListener("click", (e) => {
-    
+  const storedListJSON = localStorage.getItem('listsKey');
+  if (storedListJSON) {
+    listArray = JSON.parse(storedListJSON);
+    showTask();
+  }
+
+  // Update task list Index
+  const updateTask = () => {
+    for (let i = 0; i < listArray.length; i += 1) {
+      listArray[i].Index = i + 1;
+    }
+    localStorage.setItem('listsKey', JSON.stringify(listArray));
+  };
+
+  const removeTask = (e, newListElement) => {
+    const index = e.target.getAttribute('myIndex');
+    newListElement.remove();
+    listArray.splice(index + 1, 1);
+    updateTask();
+  };
+
+  const listObj = new List();
+  addBtn.addEventListener('click', (e) => {
+    e.preventDefault();
     const inputTextValue = document.querySelector('#input-task').value;
-    const ind = null || listArray.length+1;
+    const ind = null || listArray.length + 1;
     const comp = listObj.completed || false;
     const taskObj = new List(ind, comp, inputTextValue);
     listArray.push(taskObj);
-    //console.log(taskObj);
-    //showOnlyThisTask(taskObj);
     showTask();
     localStorage.setItem('listsKey', JSON.stringify(listArray));
-  
     document.querySelector('#input-task').value = '';
-  
   }); // End of addBtn event
 
-  function showOnlyThisTask(taskObj) {
-
-  }
-
-  function showTask() {
-    //const doList = document.createElement('div');
-    //doList.classList.add('task-lists', 'part');
-    //doList.innerHTML = '';
+  const showTask = () => {
     listsContainer.innerHTML = '';
-    for(let i = 0; i < listArray.length; i++){
-      //console.log("ListArray new = "+listArray)
+    for (let i = 0; i < listArray.length; i += 1) {
       const newList = `
       <div class = "task-lists part"> 
         <div class = "input-field>
-        <input type="checkbox" id="${i}" ${listArray[i].completed ? 'checked':''}  value="${listArray[i].description} " name = "task" class = "input-task-class opacity">
+        <input type="checkbox" id="${i}" ${listArray[i].completed ? 'checked' : ''}  value="${listArray[i].description} " name = "task" class = "input-task-class opacity">
         <label class = "opacity task-label" for="${i}"> ${listArray[i].description}  </label>
         </div>
         <input type="text" class="edit-Input hidden" value=${listArray[i].description}>
@@ -69,9 +74,8 @@ if(storedListJSON) {
           </button>    
         </div>
       </div>
-     
+    
       `;
-      //console.log('Still I am working');
       const newListElement = parser.parseFromString(newList, 'text/html').body.firstElementChild;
       const threeVBtn = newListElement.querySelector('.edit-task');
       const toBeEdited = newListElement.querySelector('.task-label');
@@ -79,63 +83,40 @@ if(storedListJSON) {
       const editInput = newListElement.querySelector('.edit-Input');
       const editBtn = newListElement.querySelector('.edit-btn');
 
-      threeVBtn.addEventListener('click', (e) => {        
-          editBtn.classList.remove('hidden');
-          threeVBtn.classList.add('hidden');
-          editInput.classList.remove('hidden');
-          editInput.style.width = "100%";
-          editInput.style.marginRight = '10px';
-          toBeEdited.classList.add('hidden');
-          editInput.focus();
+      threeVBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        editBtn.classList.remove('hidden');
+        threeVBtn.classList.add('hidden');
+        editInput.classList.remove('hidden');
+        editInput.style.width = '100%';
+        editInput.style.marginRight = '10px';
+        toBeEdited.classList.add('hidden');
+        editInput.focus();
       });
 
-       const delBtn = newListElement.querySelector('.delete-btn');
-       editInput.addEventListener('keypress', (e) => {
-        if(e.key === "Enter") {
+      const delBtn = newListElement.querySelector('.delete-btn');
+      editInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
           e.preventDefault();
           toBeEdited.innerHTML = editInput.value;
           toBeEdited.classList.remove('hidden');
-          editBtn.classList.add('hidden');  
+          editBtn.classList.add('hidden');
           delBtn.classList.remove('hidden');
           editInput.classList.add('hidden');
-          //threeVBtn.classList.remove('hidden');
           listArray[i].description = editInput.value;
           localStorage.setItem('listsKey', JSON.stringify(listArray));
         }
       });
-      
+
       // Remove task from the list
       delBtn.addEventListener('click', (e) => {
         e.preventDefault();
         removeTask(e, newListElement);
       });
 
-   
       listsContainer.append(newListElement);
-    } //end of for loop
+    } // end of for loop
 
     wrapper.append(listsContainer);
-  } //end of showtask() function
-
-  function removeTask(e, newListElement) {
-    const index = e.target.getAttribute('myIndex');
-    console.log('Index log = '+index);
-    newListElement.remove();
-    
-    listArray.splice(index+1, 1);
- 
-    updateTask();
-    console.log('listArray after trashing'+listArray);
-    //showTask();
-  }
-
-  //Update task list
-  function updateTask() {
-    for(let i = 0; i < listArray.length; i++) {
-      listArray[i].Index = i+1;
-    }
-    localStorage.setItem('listsKey', JSON.stringify(listArray));
-  }
-  //localStorage.removeItem('listsKey')
-
-}; //End of window loads
+  }; // end of showtask() function
+}; // End of window loads

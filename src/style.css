@@ -79,10 +79,9 @@ body {
 
 .edit-task,
 .edit,
-.edit-btn
+.edit-btn,
 .delete,
-.delete-btn
- {
+.delete-btn {
   cursor: pointer;
   opacity: 0.5;
 }
