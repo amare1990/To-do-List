@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To do List: Add Structure</title>
+    <title>To do List: Add and Remove</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
@@ -11,6 +11,25 @@
 <script defer src="runtime.bundle.js"></script><script defer src="index.bundle.js"></script></head>
 </head>
 <body>
-    <div class="wrapper"></div>
+    
+    <div class="wrapper">
+        <div class ="task-lists title part"> 
+            <p class ="opacity"> Today's To Do </p>
+            <button type = "button" class = "btn refresh">
+            <i class="fa fa-refresh"></i>  
+            </button>
+          </div>
+          <div class = "add-part part">
+            <input type = "text" id = "input-task" name = "task-add" placeholder = "Add your list here ..." class ="opacity">
+            <button type = "button" class = "btn add-btn">
+              <i class="fa-solid fa-turn-down-left"></i>
+            </button>
+          </div>
+          <div class="lists-container"></div>
+          <button type="button" class="clear-btn">
+            Clear all completed
+          </button>
+    </div>
+ 
 </body>
 </html>
