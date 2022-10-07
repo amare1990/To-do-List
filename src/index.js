@@ -34,7 +34,9 @@ if(storedListJSON) {
     //showOnlyThisTask(taskObj);
     showTask();
     localStorage.setItem('listsKey', JSON.stringify(listArray));
-    
+  
+    document.querySelector('#input-task').value = '';
+  
   }); // End of addBtn event
 
   function showOnlyThisTask(taskObj) {
@@ -108,7 +110,7 @@ if(storedListJSON) {
         removeTask(e, newListElement);
       });
 
-
+   
       listsContainer.append(newListElement);
     } //end of for loop
 

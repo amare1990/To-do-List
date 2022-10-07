@@ -2,7 +2,7 @@
 
 # To-do List: Add Structure
 
->To-do list project developed using HTML, CSS and JavaScript allows anybody who wants to manage the daily tasks. This specific project, To-do List: Add Structure that provides only the layout of the web content is the beginning of the To-do List complete project. It is based on the webpack setup on the previous exercise.  
+>To-do list project developed using HTML, CSS and JavaScript allows anybody who wants to manage the daily tasks. This milestone of the project, 'To-Do List: Add & Remove that provides features such as adding tasks, removing tasks, and storing the changes in 'LocalStorage' JavaScript object is the second milestone of the To-do List complete project. It is based on the webpack setup on the previous exercise.  
 ## Built With
 
 - Major languages: HTML, CSS, and JavaScript.
@@ -15,12 +15,11 @@
 **You can clone to your local repository, modify it and contribute to the project using the command from your terminal: git clone https://github.com/amare1990/To-do-List.git.**
 
 
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 You have to install node.jx and npm package manager before trying to use this project.
 
 ### Setup
+
 You have to setup webpack package bundler. You can use https://webpack.js.org/guides/getting-started/#basic-setup link to setup the webpack for your project.
 
 ## Authors
@@ -29,7 +28,7 @@ You have to setup webpack package bundler. You can use https://webpack.js.org/gu
 
 - GitHub: [@githubhandle](https://github.com/amare1990)
 - Email: [@emailhandle](amaremek@gmail.com)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/amare1990)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/amare90)
 
 ## 🤝 Contributing
 
