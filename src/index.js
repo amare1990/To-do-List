@@ -1,5 +1,4 @@
-/* eslint no-use-before-define: ["error", { "classes": false }] */
-/* eslint-env es6 */
+/* eslint no-use-before-define: */
 
 import './style.css';
 
@@ -119,5 +118,4 @@ window.onload = () => {
     listArray = JSON.parse(storedListJSON);
     showTask();
   }
-  
 }; // End of window loads
