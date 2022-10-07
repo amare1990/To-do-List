@@ -18,12 +18,6 @@ window.onload = () => {
     }
   }
 
-  const storedListJSON = localStorage.getItem('listsKey');
-  if (storedListJSON) {
-    listArray = JSON.parse(storedListJSON);
-    showTask();
-  }
-
   // Update task list Index
   const updateTask = () => {
     for (let i = 0; i < listArray.length; i += 1) {
@@ -119,4 +113,11 @@ window.onload = () => {
 
     wrapper.append(listsContainer);
   }; // end of showtask() function
+
+  const storedListJSON = localStorage.getItem('listsKey');
+  if (storedListJSON) {
+    listArray = JSON.parse(storedListJSON);
+    showTask();
+  }
+  
 }; // End of window loads
