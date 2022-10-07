@@ -1,6 +1,7 @@
 /* eslint no-use-before-define: */
 
 import './style.css';
+import List from './task.js';
 
 window.onload = () => {
   const parser = new DOMParser();
@@ -8,14 +9,6 @@ window.onload = () => {
   const listsContainer = document.querySelector('.lists-container');
   const addBtn = document.querySelector('.add-btn');
   let listArray = [];
-
-  class List {
-    constructor(Index = listArray.length, completed = false, description) {
-      this.Index = Index;
-      this.completed = completed;
-      this.description = description;
-    }
-  }
 
   // Update task list Index
   const updateTask = () => {
