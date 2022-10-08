@@ -127,10 +127,13 @@ window.onload = () => {
         let temparray = [];
         for (let i = 0; i < listArray.length; i += 1) {
           if (listArray[i].completed === false) {
-          temparray.push(listArray[i])
+            temparray.push(listArray[i])
+          }
+          else {
+            newListElement.remove();
           }
         }  
-        console.log(temparray) 
+        //console.log(temparray) 
         localStorage.setItem('listsKey', JSON.stringify(temparray));
       });
         
