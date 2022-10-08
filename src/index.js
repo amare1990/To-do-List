@@ -7,7 +7,7 @@ window.onload = () => {
   const parser = new DOMParser();
   const wrapper = document.querySelector('.wrapper');
   const listsContainer = document.querySelector('.lists-container');
-  const clearBtn = document.querySelector('.clear-btn');
+  const remCompTaskBtn = document.querySelector('.clear-btn');
   const addBtn = document.querySelector('.add-btn');
   let listArray = [];
 
@@ -123,27 +123,21 @@ window.onload = () => {
       });
 
       //Remove Completed tasks
-      const remCompTaskBtn = document.querySelector('.clear-btn');
       remCompTaskBtn.addEventListener('click', (e) => {
-        const completedTaskArray = listArray.filter(() => {
-          listArray[i].completed != true;
-        });
-        const tempArray = [];
-        for(let i = 0; i < listArray.length; i++){
-          if(listArray.completed === true) {
-            tempArray.push(tempArray);
+        let temparray = [];
+        for (let i = 0; i < listArray.length; i += 1) {
+          if (listArray[i].completed === false) {
+          temparray.push(listArray[i])
           }
-        }
-        console.log("temp array = "+tempArray);
-        //removeTask(e, newListElement);
-        newListElement.remove();
-        localStorage.setItem('listsKey', JSON.stringify(completedTaskArray));        
+        }  
+        console.log(temparray) 
+        localStorage.setItem('listsKey', JSON.stringify(temparray));
       });
-
+        
       listsContainer.appendChild(newListElement);
     } // end of for loop
 
-    wrapper.insertBefore(listsContainer, clearBtn);
+    wrapper.insertBefore(listsContainer, remCompTaskBtn);
   }; // end of showtask() function
 
   const storedListJSON = localStorage.getItem('listsKey');
