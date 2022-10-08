@@ -11,11 +11,17 @@ window.onload = () => {
   let listArray = [];
 
 //localStorage.removeItem('listsKey');
-  const taskCompleteUpdate = (index, desc) => {
-    //const completedObj = new List (index+1, true, desc);
-    //listArray.push(completedObj);
-    listArray[index].completed = true;
-    localStorage.setItem('listsKey', JSON.stringify(listArray));
+  const taskCompleteUpdate = (e, index, t) => {
+    if (e.target.checked) {
+      listArray[index].completed = true;
+      t.style.textDecoration = "line-through";
+      localStorage.setItem('listsKey', JSON.stringify(listArray));
+      }
+    else {
+      listArray[index].completed = false;
+      t.style.textDecoration = "none";
+      localStorage.setItem('listsKey', JSON.stringify(listArray));
+    }
   };
 
   // Update task list Index
@@ -105,8 +111,8 @@ window.onload = () => {
 
       const taskCheckBox= newListElement.querySelector('.input-task-class');
       taskCheckBox.addEventListener('change', (e) => {
-        const des = listArray[i].description;
-        taskCompleteUpdate(i, des);
+        //const isComplete = listArray[i].completed;
+        taskCompleteUpdate(e, i, newListElement);
       });
 
       // Remove task from the list
