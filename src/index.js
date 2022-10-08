@@ -7,6 +7,7 @@ window.onload = () => {
   const parser = new DOMParser();
   const wrapper = document.querySelector('.wrapper');
   const listsContainer = document.querySelector('.lists-container');
+  const clearBtn = document.querySelector('.clear-btn');
   const addBtn = document.querySelector('.add-btn');
   let listArray = [];
 
@@ -15,13 +16,13 @@ window.onload = () => {
     if (e.target.checked) {
       listArray[index].completed = true;
       t.style.textDecoration = "line-through";
-      localStorage.setItem('listsKey', JSON.stringify(listArray));
       }
     else {
       listArray[index].completed = false;
       t.style.textDecoration = "none";
-      localStorage.setItem('listsKey', JSON.stringify(listArray));
     }
+
+    localStorage.setItem('listsKey', JSON.stringify(listArray));
   };
 
   // Update task list Index
@@ -121,10 +122,28 @@ window.onload = () => {
         removeTask(e, newListElement);
       });
 
-      listsContainer.append(newListElement);
+      //Remove Completed tasks
+      const remCompTaskBtn = document.querySelector('.clear-btn');
+      remCompTaskBtn.addEventListener('click', (e) => {
+        const completedTaskArray = listArray.filter(() => {
+          listArray[i].completed != true;
+        });
+        const tempArray = [];
+        for(let i = 0; i < listArray.length; i++){
+          if(listArray.completed === true) {
+            tempArray.push(tempArray);
+          }
+        }
+        console.log("temp array = "+tempArray);
+        //removeTask(e, newListElement);
+        newListElement.remove();
+        localStorage.setItem('listsKey', JSON.stringify(completedTaskArray));        
+      });
+
+      listsContainer.appendChild(newListElement);
     } // end of for loop
 
-    wrapper.append(listsContainer);
+    wrapper.insertBefore(listsContainer, clearBtn);
   }; // end of showtask() function
 
   const storedListJSON = localStorage.getItem('listsKey');
