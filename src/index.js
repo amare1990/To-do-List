@@ -10,6 +10,13 @@ window.onload = () => {
   const addBtn = document.querySelector('.add-btn');
   let listArray = [];
 
+
+  const taskCompleteUpdate = (index, desc) => {
+    const completedObj = new List (index+1, true, desc);
+    listArray.push(completedObj);
+    localStorage.setItem('listsKey', JSON.stringify(listArray));
+  };
+
   // Update task list Index
   const updateTask = () => {
     for (let i = 0; i < listArray.length; i += 1) {
@@ -43,10 +50,11 @@ window.onload = () => {
     for (let i = 0; i < listArray.length; i += 1) {
       const newList = `
       <div class = "task-lists part"> 
-        <div class = "input-field>
-        <input type="checkbox" id="${i}" ${listArray[i].completed ? 'checked' : ''}  value="${listArray[i].description} " name = "task" class = "input-task-class opacity">
-        <label class = "opacity task-label" for="${i}"> ${listArray[i].description}  </label>
-        </div>
+        
+        <label class = "opacity task-label"> 
+        <input type="checkbox" id="${i}" ${listArray[i].completed ? 'checked' : ''}  name = "task" class = "input-task-class opacity">
+        ${listArray[i].description} </label>
+       
         <input type="text" class="edit-Input hidden" value=${listArray[i].description}>
         <div class = "btn-group>   
           <button type = "button" class = " btn">
@@ -62,7 +70,7 @@ window.onload = () => {
       </div>
     
       `;
-      const newListElement = parser.parseFromString(newList, 'text/html').body.firstElementChild;
+      const newListElement = parser.parseFromString(newList, 'text/html').body.firstChild;
       const threeVBtn = newListElement.querySelector('.edit-task');
       const toBeEdited = newListElement.querySelector('.task-label');
 
@@ -92,6 +100,12 @@ window.onload = () => {
           listArray[i].description = editInput.value;
           localStorage.setItem('listsKey', JSON.stringify(listArray));
         }
+      });
+
+      const taskCheckBox= newListElement.querySelector('.input-task-class');
+      taskCheckBox.addEventListener('change', (e) => {
+        const des = toBeEdited.value;
+        //taskCompleteUpdate(i, des);
       });
 
       // Remove task from the list
