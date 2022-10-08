@@ -7,8 +7,22 @@ window.onload = () => {
   const parser = new DOMParser();
   const wrapper = document.querySelector('.wrapper');
   const listsContainer = document.querySelector('.lists-container');
+  const remCompTaskBtn = document.querySelector('.clear-btn');
   const addBtn = document.querySelector('.add-btn');
   let listArray = [];
+
+  // localStorage.removeItem('listsKey');
+  const taskCompleteUpdate = (e, index, t) => {
+    if (e.target.checked) {
+      listArray[index].completed = true;
+      t.style.textDecoration = 'line-through';
+    } else {
+      listArray[index].completed = false;
+      t.style.textDecoration = 'none';
+    }
+
+    localStorage.setItem('listsKey', JSON.stringify(listArray));
+  };
 
   // Update task list Index
   const updateTask = () => {
@@ -43,10 +57,11 @@ window.onload = () => {
     for (let i = 0; i < listArray.length; i += 1) {
       const newList = `
       <div class = "task-lists part"> 
-        <div class = "input-field>
-        <input type="checkbox" id="${i}" ${listArray[i].completed ? 'checked' : ''}  value="${listArray[i].description} " name = "task" class = "input-task-class opacity">
-        <label class = "opacity task-label" for="${i}"> ${listArray[i].description}  </label>
-        </div>
+        
+        <label class = "opacity task-label"> 
+        <input type="checkbox" id="${i}" ${listArray[i].completed ? 'checked' : ''}  name = "task" class = "input-task-class opacity">
+        ${listArray[i].description} </label>
+       
         <input type="text" class="edit-Input hidden" value=${listArray[i].description}>
         <div class = "btn-group>   
           <button type = "button" class = " btn">
@@ -62,7 +77,7 @@ window.onload = () => {
       </div>
     
       `;
-      const newListElement = parser.parseFromString(newList, 'text/html').body.firstElementChild;
+      const newListElement = parser.parseFromString(newList, 'text/html').body.firstChild;
       const threeVBtn = newListElement.querySelector('.edit-task');
       const toBeEdited = newListElement.querySelector('.task-label');
 
@@ -94,16 +109,33 @@ window.onload = () => {
         }
       });
 
+      const taskCheckBox = newListElement.querySelector('.input-task-class');
+      taskCheckBox.addEventListener('change', (e) => {
+        taskCompleteUpdate(e, i, newListElement);
+      });
+
       // Remove task from the list
       delBtn.addEventListener('click', (e) => {
         e.preventDefault();
         removeTask(e, newListElement);
       });
 
-      listsContainer.append(newListElement);
+      // Remove Completed tasks
+      remCompTaskBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const temparray = [];
+        for (let i = 0; i < listArray.length; i += 1) {
+          if (listArray[i].completed === false) {
+            temparray.push(listArray[i]);
+          }
+        }
+        localStorage.setItem('listsKey', JSON.stringify(temparray));
+      });
+
+      listsContainer.appendChild(newListElement);
     } // end of for loop
 
-    wrapper.append(listsContainer);
+    wrapper.insertBefore(listsContainer, remCompTaskBtn);
   }; // end of showtask() function
 
   const storedListJSON = localStorage.getItem('listsKey');
