@@ -105,7 +105,7 @@ window.onload = () => {
       const taskCheckBox= newListElement.querySelector('.input-task-class');
       taskCheckBox.addEventListener('change', (e) => {
         const des = toBeEdited.value;
-        //taskCompleteUpdate(i, des);
+        taskCompleteUpdate(i, des);
       });
 
       // Remove task from the list
