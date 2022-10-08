@@ -111,7 +111,6 @@ window.onload = () => {
 
       const taskCheckBox = newListElement.querySelector('.input-task-class');
       taskCheckBox.addEventListener('change', (e) => {
-        // const isComplete = listArray[i].completed;
         taskCompleteUpdate(e, i, newListElement);
       });
 
