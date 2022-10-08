@@ -10,10 +10,11 @@ window.onload = () => {
   const addBtn = document.querySelector('.add-btn');
   let listArray = [];
 
-
+//localStorage.removeItem('listsKey');
   const taskCompleteUpdate = (index, desc) => {
-    const completedObj = new List (index+1, true, desc);
-    listArray.push(completedObj);
+    //const completedObj = new List (index+1, true, desc);
+    //listArray.push(completedObj);
+    listArray[index].completed = true;
     localStorage.setItem('listsKey', JSON.stringify(listArray));
   };
 
@@ -104,7 +105,7 @@ window.onload = () => {
 
       const taskCheckBox= newListElement.querySelector('.input-task-class');
       taskCheckBox.addEventListener('change', (e) => {
-        const des = toBeEdited.value;
+        const des = listArray[i].description;
         taskCompleteUpdate(i, des);
       });
 
