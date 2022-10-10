@@ -35,8 +35,13 @@ window.onload = () => {
   const removeTask = (e, newListElement) => {
     const index = e.target.getAttribute('myIndex');
     newListElement.remove();
-    listArray.splice(index + 1, 1);
-    updateTask();
+    if (listArray.Index === 1){
+      listArray.splice(index, 1);
+    }
+    else {
+      listArray.splice(index+1, 1);
+      updateTask();
+    }
   };
 
   const listObj = new List();
@@ -59,7 +64,8 @@ window.onload = () => {
       <div class = "task-lists part"> 
         
         <label class = "opacity task-label"> 
-        <input type="checkbox" id="${i}" ${listArray[i].completed ? 'checked' : ''}  name = "task" class = "input-task-class opacity">
+        <input type="checkbox" id="${i}" ${listArray[i].completed ? 'checked' : ''}
+        name = "task" class = "input-task-class opacity">
         ${listArray[i].description} </label>
        
         <input type="text" class="edit-Input hidden" value=${listArray[i].description}>
@@ -123,13 +129,11 @@ window.onload = () => {
       // Remove Completed tasks
       remCompTaskBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const temparray = [];
-        for (let i = 0; i < listArray.length; i += 1) {
-          if (listArray[i].completed === false) {
-            temparray.push(listArray[i]);
-          }
-        }
-        localStorage.setItem('listsKey', JSON.stringify(temparray));
+        
+        const listarray = listArray.filter(() => {
+          listArray[i].completed === false;
+        });
+        localStorage.setItem('listsKey', JSON.stringify(listarray));
       });
 
       listsContainer.appendChild(newListElement);
