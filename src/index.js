@@ -48,8 +48,18 @@ window.onload = () => {
   const removeTask = (i, newListElement) => {
     const index = i + 1;
     newListElement.remove();
+<<<<<<< HEAD
     listArray.splice(index - 1, 1);
     updateTask();
+=======
+    if (listArray.Index === 1){
+      listArray.splice(index, 1);
+    }
+    else {
+      listArray.splice(index+1, 1);
+      updateTask();
+    }
+>>>>>>> 4d4ef62d70f1d3bd89fbe6ad2a4deee669639e4e
   };
 
   addBtn.addEventListener('click', (e) => {
@@ -69,9 +79,15 @@ window.onload = () => {
     listsContainer.innerHTML = '';
     for (let i = 0; i < listArray.length; i += 1) {
       const newList = `
+<<<<<<< HEAD
       <div class = "task-lists part">
 
         <label class = "opacity task-label">
+=======
+      <div class = "task-lists part"> 
+        
+        <label class = "opacity task-label"> 
+>>>>>>> 4d4ef62d70f1d3bd89fbe6ad2a4deee669639e4e
         <input type="checkbox" id="${i}" ${listArray[i].completed ? 'checked' : ''}
         name = "task" class = "input-task-class opacity">
         ${listArray[i].description} </label>
@@ -138,7 +154,15 @@ window.onload = () => {
       const updatedArray = listArray.filter((todo) => todo.completed === false);
       remCompTaskBtn.addEventListener('click', (e) => {
         e.preventDefault();
+<<<<<<< HEAD
         clearAllCompleted(i, updatedArray, newListElement);
+=======
+        
+        const listarray = listArray.filter(() => {
+          listArray[i].completed === false;
+        });
+        localStorage.setItem('listsKey', JSON.stringify(listarray));
+>>>>>>> 4d4ef62d70f1d3bd89fbe6ad2a4deee669639e4e
       });
 
       listsContainer.appendChild(newListElement);
