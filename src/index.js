@@ -11,6 +11,19 @@ window.onload = () => {
   const addBtn = document.querySelector('.add-btn');
   let listArray = [];
 
+  const clearAllCompleted = (i, updatedArray, newListElement) => {
+    if (newListElement.querySelector('i').checked === true) {
+      newListElement.remove();
+      window.load();
+    }
+
+    for (let i = 0; i < updatedArray.length; i += 1) {
+      listArray.Index = i + 1;
+    }
+
+    localStorage.setItem('listsKey', JSON.stringify(updatedArray));
+  };
+
   // localStorage.removeItem('listsKey');
   const taskCompleteUpdate = (e, index, t) => {
     if (e.target.checked) {
@@ -24,28 +37,18 @@ window.onload = () => {
     localStorage.setItem('listsKey', JSON.stringify(listArray));
   };
 
-  // Update all completed tasks
-  const updateClearAllCompleted = (updatedArray, newListElement) => {
-    for(let i = 0; i < updatedArray.length; i++) {
-      listArray.Index = i +1;    
-    }
-    newListElement.remove();
-    localStorage.setItem('listsKey', JSON.stringify(updatedArray));
-  }
-
   // Update task list Index
   const updateTask = () => {
     for (let i = 0; i < listArray.length; i += 1) {
-      listArray[i].Index = i +1;
+      listArray[i].Index = i + 1;
     }
     localStorage.setItem('listsKey', JSON.stringify(listArray));
   };
 
   const removeTask = (i, newListElement) => {
     const index = i + 1;
-    console.log('remove task Index = '+ index);
     newListElement.remove();
-    listArray.splice(index-1, 1);
+    listArray.splice(index - 1, 1);
     updateTask();
   };
 
@@ -57,10 +60,8 @@ window.onload = () => {
     const comp = listObj.completed || false;
     const taskObj = new List(ind, comp, inputTextValue);
     listArray.push(taskObj);
-    showTask();
     localStorage.setItem('listsKey', JSON.stringify(listArray));
-    console.log(`listarray=${localStorage.getItem('listsKey')} index= `
-    + ` ${listArray[listArray.length - 1].Index}`);
+    showTask();
     document.querySelector('#input-task').value = '';
   }); // End of addBtn event
 
@@ -68,16 +69,16 @@ window.onload = () => {
     listsContainer.innerHTML = '';
     for (let i = 0; i < listArray.length; i += 1) {
       const newList = `
-      <div class = "task-lists part"> 
-        
-        <label class = "opacity task-label"> 
+      <div class = "task-lists part">
+
+        <label class = "opacity task-label">
         <input type="checkbox" id="${i}" ${listArray[i].completed ? 'checked' : ''}
         name = "task" class = "input-task-class opacity">
         ${listArray[i].description} </label>
-       
+
         <input type="text" class="edit-Input hidden" value=${listArray[i].description}>
-        <div class = "btn-group>   
-          <button type = "button" class = " btn">
+        <div class = "btn-group>
+          <button type = "button" class = "btn">
             <i class='fas fa-ellipsis-v edit-task'></i>
           </button>
           <button type = "button" class = "edit-btn btn hidden">
@@ -85,10 +86,10 @@ window.onload = () => {
           </button>
           <button type = "button" class = "delete-btn btn hidden" myIndex = ${i}>
             <i class="fa-solid fa-trash-can delete"></i>
-          </button>    
+          </button>
         </div>
       </div>
-    
+
       `;
       const newListElement = parser.parseFromString(newList, 'text/html').body.firstChild;
       const threeVBtn = newListElement.querySelector('.edit-task');
@@ -134,13 +135,13 @@ window.onload = () => {
       });
 
       // Remove Completed tasks
+      const updatedArray = listArray.filter((todo) => todo.completed === false);
       remCompTaskBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const updatedArray = listArray.filter(todo => todo.completed === false);      
-        updateClearAllCompleted(updatedArray, newListElement);
+        clearAllCompleted(i, updatedArray, newListElement);
       });
-      
-    listsContainer.appendChild(newListElement);
+
+      listsContainer.appendChild(newListElement);
     } // end of for loop
 
     wrapper.insertBefore(listsContainer, remCompTaskBtn);
@@ -150,7 +151,5 @@ window.onload = () => {
   if (storedListJSON) {
     listArray = JSON.parse(storedListJSON);
     showTask();
-
-    localStorage.removeItem('tasks');
   }
 }; // End of window loads
