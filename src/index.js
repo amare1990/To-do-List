@@ -11,6 +11,19 @@ window.onload = () => {
   const addBtn = document.querySelector('.add-btn');
   let listArray = [];
 
+  const clearAllCompleted = (i, updatedArray, newListElement) => {
+    if (newListElement.querySelector('i').checked === true) {
+      newListElement.remove();
+      window.load();
+    }
+
+    for (let i = 0; i < updatedArray.length; i += 1) {
+      listArray.Index = i + 1;
+    }
+
+    localStorage.setItem('listsKey', JSON.stringify(updatedArray));
+  };
+
   // localStorage.removeItem('listsKey');
   const taskCompleteUpdate = (e, index, t) => {
     if (e.target.checked) {
@@ -32,23 +45,23 @@ window.onload = () => {
     localStorage.setItem('listsKey', JSON.stringify(listArray));
   };
 
-  const removeTask = (e, newListElement) => {
-    const index = e.target.getAttribute('myIndex');
+  const removeTask = (i, newListElement) => {
+    const index = i + 1;
     newListElement.remove();
-    listArray.splice(index + 1, 1);
+    listArray.splice(index - 1, 1);
     updateTask();
   };
 
-  const listObj = new List();
   addBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    const listObj = new List();
     const inputTextValue = document.querySelector('#input-task').value;
-    const ind = null || listArray.length + 1;
+    const ind = 0 || listArray.length + 1;
     const comp = listObj.completed || false;
     const taskObj = new List(ind, comp, inputTextValue);
     listArray.push(taskObj);
-    showTask();
     localStorage.setItem('listsKey', JSON.stringify(listArray));
+    showTask();
     document.querySelector('#input-task').value = '';
   }); // End of addBtn event
 
@@ -56,15 +69,16 @@ window.onload = () => {
     listsContainer.innerHTML = '';
     for (let i = 0; i < listArray.length; i += 1) {
       const newList = `
-      <div class = "task-lists part"> 
-        
-        <label class = "opacity task-label"> 
-        <input type="checkbox" id="${i}" ${listArray[i].completed ? 'checked' : ''}  name = "task" class = "input-task-class opacity">
+      <div class = "task-lists part">
+
+        <label class = "opacity task-label">
+        <input type="checkbox" id="${i}" ${listArray[i].completed ? 'checked' : ''}
+        name = "task" class = "input-task-class opacity">
         ${listArray[i].description} </label>
-       
+
         <input type="text" class="edit-Input hidden" value=${listArray[i].description}>
-        <div class = "btn-group>   
-          <button type = "button" class = " btn">
+        <div class = "btn-group>
+          <button type = "button" class = "btn">
             <i class='fas fa-ellipsis-v edit-task'></i>
           </button>
           <button type = "button" class = "edit-btn btn hidden">
@@ -72,10 +86,10 @@ window.onload = () => {
           </button>
           <button type = "button" class = "delete-btn btn hidden" myIndex = ${i}>
             <i class="fa-solid fa-trash-can delete"></i>
-          </button>    
+          </button>
         </div>
       </div>
-    
+
       `;
       const newListElement = parser.parseFromString(newList, 'text/html').body.firstChild;
       const threeVBtn = newListElement.querySelector('.edit-task');
@@ -95,7 +109,6 @@ window.onload = () => {
         editInput.focus();
       });
 
-      const delBtn = newListElement.querySelector('.delete-btn');
       editInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
@@ -115,21 +128,17 @@ window.onload = () => {
       });
 
       // Remove task from the list
+      const delBtn = newListElement.querySelector('.delete-btn');
       delBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        removeTask(e, newListElement);
+        removeTask(i, newListElement);
       });
 
       // Remove Completed tasks
+      const updatedArray = listArray.filter((todo) => todo.completed === false);
       remCompTaskBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const temparray = [];
-        for (let i = 0; i < listArray.length; i += 1) {
-          if (listArray[i].completed === false) {
-            temparray.push(listArray[i]);
-          }
-        }
-        localStorage.setItem('listsKey', JSON.stringify(temparray));
+        clearAllCompleted(i, updatedArray, newListElement);
       });
 
       listsContainer.appendChild(newListElement);
